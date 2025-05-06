@@ -1,0 +1,9 @@
+[submodule "buildroot"]
+	path = buildroot
+	url = https://github.com/buildroot/buildroot.git
+[submodule "runtime/test/cmocka"]
+        path = runtime/test/cmocka
+        url = https://gitlab.com/cmocka/cmocka
+[submodule "examples/tiny-AES-c"]
+	path = examples/tiny-AES-c
+	url = https://github.com/kokke/tiny-AES-c.git
