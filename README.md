@@ -12,9 +12,9 @@ You can try on QEMU and HiFive Unmatched.
 ### Build
 1. Clone the repository.
 2. Initialize submodules.
-  ```
-  git submodule update --init
-  ```
+   ```
+   git submodule update --init
+   ```
 3. Build System Image
     - QEMU
       ```
@@ -24,28 +24,90 @@ You can try on QEMU and HiFive Unmatched.
       ```
       make KEYSTONE_PLATFORM=unmatched -j $(nproc)
       ```
-4. Run
-  - QEMU
-    ```
-    # Launch QEMU System Emulator
-    make run
-    ```
-  - HiFive Unmatched
-    ```
-    # You can write the image to SD Card.
-    make KEYSTONE_PLATFORM=unmatched DEVICE=/dev/sdX flush
+4. Run Emulator or Flush Image
+    - QEMU
+      ```
+      # Launch QEMU System Emulator
+      make run
+      ```
+    - HiFive Unmatched
+      ```
+      # You can write the image to SD Card.
+      make KEYSTONE_PLATFORM=unmatched DEVICE=/dev/sdX flush
 
-    # Manual Write
-    dd if=build-unmatched64/images/sdcard.img of=/dev/sdX iflag=fullblock oflag=direct conv=fsync status=progress
-    ```
+      # Manual Write
+      dd if=build-unmatched64/images/sdcard.img of=/dev/sdX iflag=fullblock oflag=direct conv=fsync status=progress
+      ```
+5. Execute Sample Application  
+   You can login as `root` with password: `sifive`.
+   ```
+   # modprobe keystone_driver
+   # cd /usr/share/keystone/examples
+   # ./hello.ke
+   ```
+    - Cache Miss
+      ```
+      # ./hello.ke
+      Verifying archive integrity... MD5 checksums are OK. All good.
+      Uncompressing Keystone Enclave Package
+      base ,size = 2199912448d, 2097152d
+      miss
+      size = 876544dbase ,size = 2199912448d, 2097152d
+      hello, world!
+      ```
+    - Cache Hit
+      ```
+      # ./hello.ke
+      Verifying archive integrity... MD5 checksums are OK. All good.
+      Uncompressing Keystone Enclave Package
+      base ,size = 2199912448d, 2097152d
+      hit
+      hello, world!
+      ```
 
-### Example Applications
+## Example Applications
 We have following example applications under `/usr/share/keystone/examples`.
-- `hello`
-- `mea*`
-- `aes`
-- `aesserver`
-- `deaesserver`
-- `singserver`
-- `socket`
-- `clients`
+- `hello.ke`
+- `mea1.ke` - `mea8.ke`
+- `aesserver.ke`
+- `signserver.ke`
+- `client`
+- `aesclient`
+- `signclient`
+
+### Launch Measurement
+`mea1.ke` - `mea8.ke` measure the startup overhead per application size.
+```
+# ./mea1.ke
+Verifying archive integrity... MD5 checksums are OK. All good.
+Uncompressing Keystone Enclave Package
+base ,size = 2199912448d, 2097152d
+miss
+size = 872448dbase ,size = 2199912448d, 2097152d
+time = 0.772971sec.
+```
+
+### Digital Signature Program
+`signserver.ke` is the server application to give a signature to the message from client application `signclient`.  
+The signinig process is performed in the enclave.
+
+```
+# ./signserver.ke &
+[1] 348
+# Verifying archive integrity... MD5 checksums are OK. All good.
+Uncompressing Keystone Enclave Package
+
+# ./signclient
+key_number0
+client100000
+host len100000
+base ,size = 2199912448d, 2097152d
+miss
+size = 1220608dbase ,size = 2199912448d, 2097152d
+enclave0.982282
+send1.1767
+length 100000
+32Echo from server: 317066a8aa7364fe8dbde5ba71bd05f2766a93fff4c7f44edbc9792540b99205
+return1.20196
+Disconnected from server.
+```
