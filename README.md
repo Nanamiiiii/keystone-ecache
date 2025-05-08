@@ -66,7 +66,7 @@ You can try on QEMU and HiFive Unmatched.
       ```
 
 ## Example Applications
-We have following example applications under `/usr/share/keystone/examples`.
+We provide following example applications under `/usr/share/keystone/examples`.
 - `hello.ke`
 - `mea1.ke` - `mea8.ke`
 - `aesserver.ke`
@@ -74,6 +74,8 @@ We have following example applications under `/usr/share/keystone/examples`.
 - `client`
 - `aesclient`
 - `signclient`
+
+Self-extract packages (`*.ke`) include dummy certificate, publickey, and signature for the applications to test functionality.
 
 ### Launch Measurement
 `mea1.ke` - `mea8.ke` measure the startup overhead per application size.
