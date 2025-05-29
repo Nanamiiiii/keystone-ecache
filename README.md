@@ -1,16 +1,32 @@
 # Keystone with Enclave Cache
 
+![](https://systex-workshop.github.io/2025/img/systexbadges-available.svg)
+![](https://systex-workshop.github.io/2025/img/systexbadges-functional.svg)
+![](https://systex-workshop.github.io/2025/img/systexbadges-reusable.svg)
+
 ## Getting Started
 You can try on QEMU and HiFive Unmatched.
 
 ### Prerequisites
 - Ubuntu and its flavors are recommended
-- Install required packages by Buildroot
+- Install following required packages
+  ```
+  sudo apt update
+  sudo apt install autoconf automake autotools-dev bc \
+    bison build-essential curl expat jq libexpat1-dev flex gawk gcc git \
+    gperf libgmp-dev libmpc-dev libmpfr-dev libtool texinfo tmux \
+    patchutils zlib1g-dev wget bzip2 patch vim-common lbzip2 python3 \
+    pkg-config libglib2.0-dev libpixman-1-dev libssl-dev screen \
+    device-tree-compiler expect makeself unzip cpio rsync cmake ninja-build p7zip-full
+  ```
     - Follow the [Buildroot Docs](https://buildroot.org/downloads/manual/manual.html#requirement)
-- Most of the build process is common to original Keystone. Please refer [Keystone's Docs](http://docs.keystone-enclave.org).
+    - Most of the build process is common to original Keystone. Referring [Keystone's Docs](http://docs.keystone-enclave.org) is useful.
 
 ### Build
 1. Clone the repository.
+   ```
+   git clone https://github.com/Nanamiiiii/keystone-ecache.git -b systex-2025
+   ```
 2. Initialize submodules.
    ```
    git submodule update --init
