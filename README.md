@@ -1,8 +1,8 @@
 # Keystone with Enclave Cache
 
-![](https://systex-workshop.github.io/2025/img/systexbadges-available.svg)
-![](https://systex-workshop.github.io/2025/img/systexbadges-functional.svg)
-![](https://systex-workshop.github.io/2025/img/systexbadges-reusable.svg)
+[![](https://systex-workshop.github.io/2025/img/systexbadges-available.svg)](https://systex-workshop.github.io/2025/artifact.html)
+[![](https://systex-workshop.github.io/2025/img/systexbadges-functional.svg)](https://systex-workshop.github.io/2025/artifact.html)
+[![](https://systex-workshop.github.io/2025/img/systexbadges-reusable.svg)](https://systex-workshop.github.io/2025/artifact.html)
 
 ## Getting Started
 You can try on QEMU and HiFive Unmatched.
